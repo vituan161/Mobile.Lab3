@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import {Button, Alert, FlatList, Text, View, Image, TouchableOpacity } from 'react-native'
+import {Button,Alert, FlatList, Text, View, Image, TouchableOpacity } from 'react-native'
+import * as React from 'react';
 import styles from './productStyle';
-//import { Button } from "react-native-paper";
+import { Appbar } from "react-native-paper";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 
 const ProductList = () => {
@@ -33,15 +35,15 @@ const ProductList = () => {
         // ))}</View>
 
         <View>
-            <Text style = {{fontSize:30, fontWeight:'bold', left:20, top: 20}}>Product List</Text>
+            <Text style = {{fontSize:30, fontWeight:'bold', margin:10}}>Product List</Text>
             <FlatList
                 data={data}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) =>
-                    <View style={{flexDirection: 'row' }}>
-                        <View style={styles.container}>
+                    <View>
+                        <View style = {styles.container}>
                             <Image style={styles.image} source={{ uri: item.thumbnail }} />
-                            <View >
+                            <View>
                                 <Text>Title: {item.title}</Text>
                                 <Text>Description: {item.description}</Text>
                                 <Text>Prices: {item.price}</Text>
@@ -51,14 +53,12 @@ const ProductList = () => {
                                 <Text>Brand: {item.brand}</Text>
                                 <Text>Category: {item.category}</Text>
                                 <View style={{flexDirection:'row'}}>
-                                    <Button title='Detail'></Button>
-                                    <Button title='Add'/>
-                                    <Button title='Delete'/>
+                                    <TouchableOpacity style = {styles.buttons}><Text style={styles.buttonstext}>Detail</Text></TouchableOpacity>
+                                    <TouchableOpacity style = {styles.buttons}><Text style={styles.buttonstext}>Add</Text></TouchableOpacity>
+                                    <TouchableOpacity style = {styles.buttons}><Text style={styles.buttonstext}>Delete</Text></TouchableOpacity>
                                 </View>
                             </View>
-
                         </View>
-
                     </View>
                 }
             />
