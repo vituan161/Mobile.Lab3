@@ -43,7 +43,7 @@ const ProductList = () => {
                     <View>
                         <View style = {styles.container}>
                             <Image style={styles.image} source={{ uri: item.thumbnail }} />
-                            <View>
+                            <View style= {{flex:1}}>
                                 <Text>Title: {item.title}</Text>
                                 <Text>Description: {item.description}</Text>
                                 <Text>Prices: {item.price}</Text>
