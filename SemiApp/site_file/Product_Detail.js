@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Card } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
 
 const ProductDetail = () => {
     const [data, setData] = useState([]);
@@ -24,7 +24,7 @@ const ProductDetail = () => {
                 console.error('Error fetching data', error);
                 setLoading(false);
             })
-    });
+    },[]);
 
     if(loading){
         return <Text>Loading...</Text>
@@ -34,7 +34,7 @@ const ProductDetail = () => {
         <Card>
             <Card.Title title="Product Detail" />
             <Card.Cover style={styles.image} source={{ uri: data.thumbnail }} />
-            <View style={{ margin: 10 }}>
+            <Card.Content style={{ margin: 10 }}>
                 <Text style={{ fontSize: 30 }}>Title: {data.title}</Text>
                 <Text>Description: {data.description}</Text>
                 <Text>Prices: {data.price}</Text>
@@ -43,7 +43,11 @@ const ProductDetail = () => {
                 <Text>Stock: {data.stock}</Text>
                 <Text>Brand: {data.brand}</Text>
                 <Text>Category: {data.category}</Text>
-            </View>
+            </Card.Content>
+            <Card.Actions>
+                <Button style={styles.button}>Delete</Button>
+                <Button style={styles.button}>Cancel</Button>
+            </Card.Actions>
         </Card>
     );
 };
@@ -59,6 +63,9 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 200,
     },
+    button:{
+        textDecorationColor: 'white',
+    }
 });
 
 export default ProductDetail;
