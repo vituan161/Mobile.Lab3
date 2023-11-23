@@ -9,6 +9,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const ProductList = () => {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const filePath = 'https://dummyjson.com/products';
     useEffect(() => {
         fetch(filePath)
@@ -20,12 +21,21 @@ const ProductList = () => {
             })
             .then((d) => {
                 setData(d.products);
-
+                setLoading(false);
             })
             .catch((error) => {
                 console.error('Error fetching data', error);
+                setLoading(false);
             })
-    });
+    },[]);
+
+    if(loading){
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style = {{fontSize:30, alignSelf:"center", justifyContent:"center", color:"black"}}>Loading...</Text>
+            </View>
+        )
+    }
 
     return (
         // <View>{data.map((item,index) => (
